@@ -5,28 +5,6 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 
 export class Home extends React.Component {
-  items = [
-    {   
-        "title":"Implement Login view.",
-        "description": "some description text ",
-        "responsible": {
-            "name": "Santiago Carrillo",
-            "email": "sancarbar@gmail.com"
-        },
-        "status": "ready",
-        "dueDate": 156464645646
-    },
-    {   
-        "title":"Implement Login view.",
-        "description": "Learn to program in ReactJS",
-        "responsible": {
-          "name": "Cesar Gonzalez",
-          "email": "cesego98@gmail",
-        },
-        "status": "completed",
-        "dueDate": 156464645646
-    },
-  ]
   render() {
     return (
       <div className="id">
@@ -34,7 +12,26 @@ export class Home extends React.Component {
         <TodoList
           todoList={
             localStorage.getItem("items") === null
-              ? []
+              ? [
+                {   
+                    descripcion: "some description text ",
+                    responsable: {
+                        name: "Santiago Carrillo",
+                        email: "sancarbar@gmail.com"
+                    },
+                    status: "ready",
+                    dueDate: 156464645646
+                },
+                {   
+                    descripcion: "Learn to program in ReactJS",
+                    responsable: {
+                      name: "Cesar Gonzalez",
+                      email: "cesego98@gmail",
+                    },
+                    status: "completed",
+                    dueDate: 156464645646
+                },
+              ]
               : JSON.parse(localStorage.getItem("items"))
           }
         />
