@@ -10,7 +10,9 @@ Debes seguir el Código de honor del ingeniero de sistemas para defender el est�
 * No puedes participar en otras actividades que mejorarán de manera deshonesta tus resultados o que mejorarán de manera deshonesta o dañarán los resultados de otras personas.
 
 # Authors
-
+## Credenciales 
+user; cesego98@gmail.com
+contraseña: hola123
 [César González](https://github.com/csarssj) 
 
 _Fecha : 5 de febrero del 2021_ 
