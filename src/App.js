@@ -1,59 +1,52 @@
-import React, {Component} from 'react';
-import './App.css';
-import 'react-datepicker/dist/react-datepicker.css';
-import {Login} from './components/Login'
-import PersistentDrawerLeft from './components/drawer'
-import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
-
+  
+import React, { Component } from "react";
+import "./App.css";
+import { Login } from "./components/Login";
+import { Home } from "./components/Home";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import NewTask from "./components/NewTask";
+import { UserProfile } from "./components/UserProfile";
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+    };
+    this.handleIsLoggedIn = this.handleIsLoggedIn.bind(this);
+  }
+  handleIsLoggedIn() {
+    this.setState({
+      isLoggedIn: true
+    });
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoggedIn: false   
-        };
-        this.handleIsLogin = this.handleIsLogin.bind(this);
+  render() {
+    var redirect;
+    if(this.state.isLoggedIn === false && localStorage.getItem("email") === null){
+      redirect = <Redirect to = {"/"}/>
+    }else{
+      redirect = <Redirect to = {"/home"}/>
     }
-
-    handleIsLogin() {
-        this.setState({
-            isLoggedIn: true
-        });
-    }
-    render() {
-        
-        const LoginView = () => (
-            <Login Login={this.handleIsLogin}/>
-        );
-        const TodoAppView = () => (
-            <div>
-                <PersistentDrawerLeft />
-            </div>
-        );
-
-        var redirect;
-        if(this.state.isLoggedIn === false){
-            redirect = <Redirect to={"/"} />;
-        }else{
-            redirect = <Redirect to={"/todo"} />
-        }
-        return (
-            <Router>
-                <div className="App">
-                    <br/>
-                    <br/>
-                    <div>
-                        {redirect}
-                        <Route exact path="/" component={LoginView}/>
-                        <Route path="/todo" component={TodoAppView}/>
-                    </div>
-                </div>
-            </Router>
-        );
-    }
-
-
-
+    const LoginView = () => <Login login={this.handleIsLoggedIn} />;
+    const TodoAppView = () => <div>
+                                <Home />
+                              </div>;
+    const newTask = () => <NewTask />;
+    const userProfile = () => <UserProfile />;
+    return (
+      <Router>
+      <div className="App">
+       
+          <div>
+          <Route exact path="/" component={LoginView}/>
+          <Route path="/home" component={TodoAppView} />
+          <Route path="/new-task" component={newTask} />
+          <Route path="/user-profile" component={userProfile} />
+          </div>
+      </div>
+    </Router>
+    );
+  }
 }
 
 export default App;
